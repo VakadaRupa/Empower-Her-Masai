@@ -1,0 +1,82 @@
+-- Create Users Table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create Orders Table
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    amount INTEGER NOT NULL,
+    status TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Insert 5 Users
+INSERT INTO users (name, email) VALUES 
+('Alice Smith', 'alice@example.com'),
+('Bob Jones', 'bob@example.com'),
+('Charlie Brown', 'charlie@example.com'),
+('Diana Prince', 'diana@example.com'),
+('Ethan Hunt', 'ethan@example.com');
+
+-- Insert 10 Orders
+INSERT INTO orders (user_id, amount, status) VALUES 
+(1, 150, 'completed'), (1, 50, 'pending'), (1, 300, 'shipped'), -- Alice
+(2, 20, 'completed'),                                         -- Bob
+(3, 100, 'pending'), (3, 45, 'completed'),                    -- Charlie
+(4, 500, 'shipped'),                                          -- Diana
+(5, 75, 'completed'), (5, 10, 'cancelled'), (5, 90, 'pending'); -- Ethan
+
+-- Fetch all users
+SELECT * FROM users;
+
+-- Fetch all orders
+SELECT * FROM orders;
+
+-- Fetch all orders for a specific user (e.g., Alice, ID 1)
+SELECT * FROM orders WHERE user_id = 1;
+
+-- Fetch users who have more than one order
+SELECT users.name, COUNT(orders.id) as order_count
+FROM users
+JOIN orders ON users.id = orders.user_id
+GROUP BY users.id
+HAVING COUNT(orders.id) > 1;
+
+-- Fetch total order amount per user
+SELECT users.name, SUM(orders.amount) as total_spent
+FROM users
+JOIN orders ON users.id = orders.user_id
+GROUP BY users.id;
+
+-- Update the email of one user
+UPDATE users SET email = 'alice.new@example.com' WHERE id = 1;
+
+-- Update the status of all orders for a specific user
+UPDATE orders SET status = 'delivered' WHERE user_id = 3;
+
+-- Update order amount for a single order
+UPDATE orders SET amount = 250 WHERE id = 7;
+
+-- Delete one order using order id
+DELETE FROM orders WHERE id = 10;
+
+-- Delete all orders of a specific user
+DELETE FROM orders WHERE user_id = 2;
+
+-- Attempt deleting a user with existing orders
+-- Observation: If "ON DELETE CASCADE" was NOT used, this would throw a Foreign Key constraint error.
+-- Because we included CASCADE in Step 1, this will succeed and delete all associated orders.
+DELETE FROM users WHERE id = 5;
+
+/* -- Why should orders not be stored inside the users table?
+Storing orders in the users table violates database normalization (specifically First Normal Form). 
+It would create "Multi-valued attributes" or massive data redundancy. 
+By separating them, we ensure:
+1. Data Integrity: Each order is a unique record.
+2. Scalability: A user can have 1 or 1,000,000 orders without breaking the user record structure.
+3. Efficiency: We can query, filter, and aggregate orders without loading unnecessary user profile data.
+*/

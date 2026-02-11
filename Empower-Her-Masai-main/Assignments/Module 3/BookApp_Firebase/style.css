@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    display: flex;
+    font-family: Arial;
+}
+
+#sidebar {
+    width: 280px;
+    background: #f0f0f0;
+    padding: 20px;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+#sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#sidebar input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+#sidebar button {
+    width: 100%;
+    padding: 10px;
+    background: #0084ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Main Section */
+#main {
+    flex: 1;
+    padding: 20px;
+}
+
+#book-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Card */
+.book-card {
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    background: white;
+    text-align: center;
+}
+
+.book-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.book-card button {
+    padding: 8px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    background: #0084ff;
+    color: white;
+    border-radius: 4px;
+}
+
+.delete-btn {
+    background: red;
+}
+
+/* Modal */
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-content {
+    background: white;
+    padding: 20px;
+    width: 350px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#modal-content img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+#closeModal {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    background: black;
+    color: white;
+    cursor: pointer;
+}

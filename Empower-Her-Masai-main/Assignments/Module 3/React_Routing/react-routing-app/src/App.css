@@ -1,0 +1,104 @@
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --primary: #4f46e5;      /* Indigo */
+  --primary-hover: #4338ca;
+  --bg-body: #f8fafc;     /* Soft Slate */
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --nav-bg: #0f172a;      /* Midnight Blue */
+  --success: #10b981;
+  --error: #ef4444;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+}
+
+/* Navbar Updates */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--nav-bg);
+  padding: 0.75rem 10%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+.nav-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-links a.active {
+  color: #fff;
+  background-color: var(--primary);
+}
+
+/* Todo Card Updates */
+.todo-card {
+  background: var(--bg-card);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.todo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.todo-card h3 {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+/* Badge Updates */
+.status-badge {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.completed {
+  background: #dcfce7;
+  color: var(--success);
+}
+
+.pending {
+  background: #fee2e2;
+  color: var(--error);
+}
+
+/* Page Headers */
+h1 {
+  font-weight: 800;
+  color: var(--nav-bg);
+  margin-bottom: 2rem;
+}
