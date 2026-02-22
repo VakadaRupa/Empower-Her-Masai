@@ -1,0 +1,3 @@
+//Title: L0 - Convert to Arrow Function with Default Parameters
+const multiply = (a = 1, b = 1) => a*b;
+console.log(multiply(3,4));
